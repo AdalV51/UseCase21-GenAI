@@ -12,7 +12,7 @@ FROM (
         DATEPART(year, [FS].[Invoice Date Key]) AS [Year],
         [DSI].[Stock Item] AS ProductName,
         CAST(SUM([FS].[Quantity]) AS DECIMAL) AS SalesQuantity,
-        SUM([FS].[Quantity]) * SUM([FS].[Unit Price]) AS SalesRevenue
+        SUM([FS].[Quantity] * [FS].[Unit Price]) AS SalesRevenue
     FROM [Dimension].[Stock Item] DSI
     JOIN [Fact].[Sale] FS ON [DSI].[Stock Item Key] = [FS].[Stock Item Key]
     GROUP BY DATEPART(year, [FS].[Invoice Date Key]),DATEPART(q, [FS].[Invoice Date Key]), [DSI].[Stock Item]
